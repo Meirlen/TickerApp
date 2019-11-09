@@ -26,7 +26,7 @@ buildscript {
 
 
         //TEST
-        mockitoVersion = '2.8.47'
+        mockitoVersion = '2.21.0'
         mockitoKotlinVersion = '1.5.0'
         junitVersion = '4.12'
         robolectricVersion = '3.5.1'
