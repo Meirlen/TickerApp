@@ -1,4 +1,4 @@
-package kz.atf24.bank.base.recycler
+package kz.ticker.android.base
 
 interface OnItemClickListener {
 

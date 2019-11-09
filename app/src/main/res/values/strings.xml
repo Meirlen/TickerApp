@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TicketApp</string>
     <string name="currency_activity_title">Currency</string>
+    <string name="ticker_size_text">All items:</string>
 </resources>

@@ -3,20 +3,24 @@ package kz.ticker.android.ui
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.data.exception.handleError
+import com.example.gateway.entity.Currency
 import kotlinx.android.synthetic.main.fragment_ticket.*
 import kz.ticker.android.R
 import kz.ticker.android.vo.Status
 import kz.ticker.android.ext.*
 import kz.ticker.android.router.MainRouter
+import kz.ticker.android.ui.ticket.TickerAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.android.ext.android.inject
 
 
-class TicketFragment : Fragment() {
+class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     companion object {
@@ -26,19 +30,43 @@ class TicketFragment : Fragment() {
     }
 
     private val mViewModel: TicketViewModel by viewModel()
+    private lateinit var tickerAdapter: TickerAdapter
+    private var dataList = mutableListOf<Currency>()
+
     val router by inject<MainRouter>()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_ticket, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
+        setUpRecyclerView()
+        setListeners()
+        loadData()
+    }
+
+
+    private fun setUpRecyclerView() {
+        tickerAdapter = TickerAdapter(dataList)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = tickerAdapter
+    }
+
+
+    private fun loadData() {
         mViewModel.getCurrencies()
     }
 
+    private fun setListeners() {
+        swipeRefreshLayout.setOnRefreshListener(this)
+    }
 
     /**
      * Подписка на LiveData
@@ -52,21 +80,29 @@ class TicketFragment : Fragment() {
             when (it?.status) {
                 Status.LOADING -> {
                     activity!!.hideKeyboard()
-                    displayProgress()
+                    showProgress()
                 }
                 Status.SUCCESS -> {
-                    displayNormal()
-                    snacbar(root_layout, it.data?.size.toString())
+                    it.data?.let {
+                        showCurrencyList(it)
+                    }
+                    hideProgress()
 
                 }
                 Status.ERROR -> {
                     it.error?.let {
                         showError(it)
                     }
-                    displayNormal()
+                    hideProgress()
                 }
             }
         })
+    }
+
+    private fun showCurrencyList(list: List<Currency>) {
+        dataList.clear()
+        dataList.addAll(list)
+        tickerAdapter.notifyDataSetChanged()
     }
 
 
@@ -76,12 +112,16 @@ class TicketFragment : Fragment() {
         }
     }
 
-
-    private fun displayNormal() {
-        mProgressBar.show()
+    override fun onRefresh() {
+        loadData()
     }
 
-    private fun displayProgress() {
-        mProgressBar.hide()
+    private fun hideProgress() {
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    private fun showProgress() {
+        swipeRefreshLayout.isRefreshing = true
+
     }
 }
