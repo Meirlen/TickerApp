@@ -9,5 +9,6 @@
 - Arch Components (ViewModel,LiveData)
 
 
-<img src="https://github.com/Meirlen/Graphic/blob/master/screenshots/bQyqzYEPcVs.jpg" alt="alt text" width="250" height="400r">
+<img src="https://github.com/Meirlen/TickerApp/blob/master/screenshots/page_two.jpg" alt="alt text" width="250" height="400r">
+<img src="https://github.com/Meirlen/TickerApp/blob/master/screenshots/page_two.jpg" alt="alt text" width="250" height="400r">
 
