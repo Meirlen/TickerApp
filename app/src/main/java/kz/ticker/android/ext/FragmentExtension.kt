@@ -1,20 +1,20 @@
 package kz.ticker.android.ext
 
-import android.support.annotation.IdRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.annotation.IdRes
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import android.view.View
 import android.widget.Toast
 
 
-inline fun FragmentManager.replaceOnce(
+inline fun androidx.fragment.app.FragmentManager.replaceOnce(
     @IdRes containerViewId: Int,
     fragmentTag: String,
-    body: () -> Fragment,
+    body: () -> androidx.fragment.app.Fragment,
     withBackStack: Boolean = false
-): FragmentTransaction {
+): androidx.fragment.app.FragmentTransaction {
 
     val transaction = this.beginTransaction()
     val fragment = this.findFragmentByTag(fragmentTag)
@@ -28,12 +28,12 @@ inline fun FragmentManager.replaceOnce(
 
 }
 
-inline fun FragmentManager.replaceByTag(
+inline fun androidx.fragment.app.FragmentManager.replaceByTag(
     @IdRes containerViewId: Int,
     fragmentTag: String,
-    body: () -> Fragment,
+    body: () -> androidx.fragment.app.Fragment,
     withBackStack: Boolean = true
-): FragmentTransaction {
+): androidx.fragment.app.FragmentTransaction {
 
     val transaction = this.beginTransaction()
     val fragment = this.findFragmentByTag(fragmentTag)
@@ -48,12 +48,12 @@ inline fun FragmentManager.replaceByTag(
     return transaction
 }
 
-fun Fragment.toast(message: String) =
+fun androidx.fragment.app.Fragment.toast(message: String) =
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
 
-fun Fragment.snacbar(view: View, message: String) = Snackbar.make(
+fun androidx.fragment.app.Fragment.snacbar(view: View, message: String) = com.google.android.material.snackbar.Snackbar.make(
     view,
     message,
-    Snackbar.LENGTH_LONG
+    com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 ).show()

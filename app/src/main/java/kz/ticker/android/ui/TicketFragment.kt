@@ -1,10 +1,10 @@
 package kz.ticker.android.ui
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.android.ext.android.inject
 
 
-class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
 
 
     companion object {
@@ -59,7 +59,7 @@ class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 router.openCurrency(context,dataList[position])
             }
         })
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         recyclerView.adapter = tickerAdapter
     }
 

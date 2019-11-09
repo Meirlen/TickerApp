@@ -3,7 +3,7 @@ package kz.ticker.android
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kz.ticker.android.ext.*
 import kz.ticker.android.ui.TicketFragment

@@ -21,12 +21,9 @@ public class GetCurrenciesUseCaseTest {
     @Mock
     private TickerRepository tickerRepository;
 
-
     @Before
     public void setUp() throws Exception {
-
         getCurrenciesUseCase = new GetCurrenciesUseCase(tickerRepository);
-
     }
 
     @Test

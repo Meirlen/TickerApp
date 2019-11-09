@@ -1,7 +1,7 @@
 package kz.ticker.android.base
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 
@@ -9,7 +9,7 @@ abstract class BaseRecyclerAdapter<T>(
     protected val dataList: List<T>,
     protected val onItemClickListener: OnItemClickListener? = null
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     var withHeader = false
     var withFooter = false
@@ -20,7 +20,7 @@ abstract class BaseRecyclerAdapter<T>(
         private const val FOOTER_TYPE = 300
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val context = parent.context
         return when (viewType) {
             HEADER_TYPE -> HeaderViewHolder(getHeaderView(context))
@@ -29,11 +29,11 @@ abstract class BaseRecyclerAdapter<T>(
         }
     }
 
-    protected open fun getItemHolder(context: Context, viewType: Int): RecyclerView.ViewHolder {
+    protected open fun getItemHolder(context: Context, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return DefaultViewHolder(getItemView(context, viewType), onItemClickListener, withHeader)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         val itemPosition = position - getHeaderOffset()
         if (itemPosition < 0) {
             bindHeaderData(holder.itemView, position)
@@ -85,7 +85,7 @@ abstract class BaseRecyclerAdapter<T>(
     }
 
     class DefaultViewHolder(itemView: View, onItemClickListener: OnItemClickListener?, withHeader: Boolean) :
-        RecyclerView.ViewHolder(itemView) {
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener {
@@ -98,9 +98,9 @@ abstract class BaseRecyclerAdapter<T>(
         }
     }
 
-    class HeaderViewHolder(headerView: View?) : RecyclerView.ViewHolder(headerView!!)
+    class HeaderViewHolder(headerView: View?) : androidx.recyclerview.widget.RecyclerView.ViewHolder(headerView!!)
 
-    class FooterViewHolder(footerView: View?) : RecyclerView.ViewHolder(footerView!!)
+    class FooterViewHolder(footerView: View?) : androidx.recyclerview.widget.RecyclerView.ViewHolder(footerView!!)
 
 
 }

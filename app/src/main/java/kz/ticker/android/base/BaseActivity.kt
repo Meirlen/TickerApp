@@ -4,9 +4,9 @@ package kz.ticker.android.base
 
 import android.graphics.PorterDuff
 
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 
 import kz.ticker.android.R
