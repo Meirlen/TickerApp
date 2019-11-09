@@ -17,6 +17,7 @@ class TickerHeaderItem @JvmOverloads constructor(
 
     init {
         layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        setBackgroundColor(context.resources.getColor(R.color.black))
         View.inflate(context, R.layout.item_header, this)
     }
 

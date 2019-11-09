@@ -28,13 +28,14 @@ class CurrencyActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_currency)
-        mToolBar.setToolbarPram(getString(R.string.currency_activity_title))
         showCurrency()
     }
 
     private fun showCurrency() {
         getExtraCurrency()?.let {
             currencyView.setData(it)
+            mToolBar.setToolbarPram(it.name ?: getString(R.string.currency_activity_title))
+
         }
     }
 
