@@ -1,8 +1,9 @@
-package kz.ticker.android.ui
+package kz.ticker.android.ui.detail
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.example.gateway.entity.Currency
 import kotlinx.android.synthetic.main.activity_currency.*
 import kz.ticker.android.R
 
@@ -14,10 +15,12 @@ class CurrencyActivity : BaseActivity() {
 
 
     companion object {
-        const val CURRENCY_FRAGMENT = 0
+        const val EXTRA_CURRENCY = "EXTRA_CURRENCY"
 
-        fun getStartIntent(context: Context): Intent {
+
+        fun getStartIntent(context: Context, currency: Currency): Intent {
             val intent = Intent(context, CurrencyActivity::class.java)
+            intent.putExtra(EXTRA_CURRENCY, currency)
             return intent
         }
     }
@@ -26,13 +29,16 @@ class CurrencyActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_currency)
         mToolBar.setToolbarPram(getString(R.string.currency_activity_title))
-        switchFragment()
+        showCurrency()
     }
 
-    private fun switchFragment() {
-        supportFragmentManager.replaceOnce(R.id.frame_container, CURRENCY_FRAGMENT.toString(), {
-            CurrencyFragment.newInstance()
-        }).commit()
+    private fun showCurrency() {
+        getExtraCurrency()?.let {
+
+        }
     }
+
+
+    private fun getExtraCurrency() = intent.getParcelableExtra<Currency>(EXTRA_CURRENCY)
 
 }

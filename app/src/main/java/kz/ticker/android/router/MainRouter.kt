@@ -1,14 +1,15 @@
 package kz.ticker.android.router
 
 import android.content.Context
-import kz.ticker.android.ui.CurrencyActivity
+import com.example.gateway.entity.Currency
+import kz.ticker.android.ui.detail.CurrencyActivity
 
 
 class MainRouter {
 
-    fun openCurrency(context: Context?) {
+    fun openCurrency(context: Context?, currency: Currency) {
         context?.let {
-            it.startActivity(CurrencyActivity.getStartIntent(it))
+            it.startActivity(CurrencyActivity.getStartIntent(it,currency))
         }
     }
 }

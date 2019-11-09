@@ -33,8 +33,7 @@ class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private val mViewModel: TicketViewModel by viewModel()
     private lateinit var tickerAdapter: TickerAdapter
     private var dataList = mutableListOf<Currency>()
-
-    val router by inject<MainRouter>()
+    private val router by inject<MainRouter>()
 
 
     override fun onCreateView(
@@ -57,7 +56,7 @@ class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun setUpRecyclerView() {
         tickerAdapter = TickerAdapter(dataList, object : OnItemClickListener {
             override fun onItemClicked(position: Int) {
-                toast(position.toString())
+                router.openCurrency(context,dataList[position])
             }
         })
         recyclerView.layoutManager = LinearLayoutManager(context)

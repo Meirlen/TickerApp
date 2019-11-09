@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-                android:name="kz.ticker.android.ui.CurrencyActivity"
+                android:name="kz.ticker.android.ui.detail.CurrencyActivity"
                 android:screenOrientation="portrait"/>
     </application>
 
