@@ -34,10 +34,9 @@ class CurrencyActivity : BaseActivity() {
 
     private fun showCurrency() {
         getExtraCurrency()?.let {
-
+            currencyView.setData(it)
         }
     }
-
 
     private fun getExtraCurrency() = intent.getParcelableExtra<Currency>(EXTRA_CURRENCY)
 
