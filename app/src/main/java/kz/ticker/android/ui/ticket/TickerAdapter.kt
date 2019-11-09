@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.View
 import com.example.gateway.entity.Currency
 import kz.ticker.android.base.BaseRecyclerAdapter
+import kz.ticker.android.base.OnItemClickListener
 
 
 open class TickerAdapter(
-    dataList: List<Currency>
+    dataList: List<Currency>,onItemClickListener: OnItemClickListener
 ) :
-    BaseRecyclerAdapter<Currency>(dataList) {
+    BaseRecyclerAdapter<Currency>(dataList,onItemClickListener) {
 
     init {
         withHeader = true

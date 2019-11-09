@@ -12,6 +12,7 @@ import com.example.data.exception.handleError
 import com.example.gateway.entity.Currency
 import kotlinx.android.synthetic.main.fragment_ticket.*
 import kz.ticker.android.R
+import kz.ticker.android.base.OnItemClickListener
 import kz.ticker.android.vo.Status
 import kz.ticker.android.ext.*
 import kz.ticker.android.router.MainRouter
@@ -54,7 +55,11 @@ class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     private fun setUpRecyclerView() {
-        tickerAdapter = TickerAdapter(dataList)
+        tickerAdapter = TickerAdapter(dataList, object : OnItemClickListener {
+            override fun onItemClicked(position: Int) {
+                toast(position.toString())
+            }
+        })
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = tickerAdapter
     }
