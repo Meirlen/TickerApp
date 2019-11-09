@@ -5,6 +5,8 @@ import com.example.domain.exception.ServerException
 import io.reactivex.Single
 import retrofit2.Response
 
+
+
 fun <T> request(call: Single<Response<T>>): Single<T> {
     return call.flatMap { response ->
         if (response.isSuccessful) {

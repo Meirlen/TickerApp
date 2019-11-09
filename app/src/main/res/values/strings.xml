@@ -2,4 +2,5 @@
     <string name="app_name">TicketApp</string>
     <string name="currency_activity_title">Currency</string>
     <string name="ticker_size_text">All items:</string>
+    <string name="no_internet_connect_error_message">Проверьте подключение к интернету</string>
 </resources>

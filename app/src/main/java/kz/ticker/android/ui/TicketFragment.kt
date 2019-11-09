@@ -14,11 +14,13 @@ import kz.ticker.android.vo.Status
 import kz.ticker.android.ext.*
 import kz.ticker.android.router.MainRouter
 import kz.ticker.android.ui.ticket.TickerAdapter
+import kz.ticker.android.utils.NetworkHandler
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.android.ext.android.inject
 
 
-class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
+class TicketFragment : androidx.fragment.app.Fragment(),
+    androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
 
 
     companion object {
@@ -31,6 +33,7 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
     private lateinit var tickerAdapter: TickerAdapter
     private var dataList = mutableListOf<Currency>()
     private val router by inject<MainRouter>()
+    private val networkHandler by inject<NetworkHandler>()
 
 
     override fun onCreateView(
@@ -53,7 +56,7 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
     private fun setUpRecyclerView() {
         tickerAdapter = TickerAdapter(dataList, object : OnItemClickListener {
             override fun onItemClicked(position: Int) {
-                router.openCurrency(context,dataList[position])
+                router.openCurrency(context, dataList[position])
             }
         })
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
@@ -112,9 +115,18 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
 
 
     private fun showError(throwable: Throwable) {
-        handleError(throwable) { title, desc ->
-            snacbar(root_layout, title + desc)
+        if (!networkHandler.isConnected) {
+            showError(getString(R.string.no_internet_connect_error_message))
+            return
         }
+        handleError(throwable) { title, desc ->
+            showError(title + desc)
+        }
+
+    }
+
+    private fun showError(error: String) {
+        snacbar(root_layout, error)
     }
 
     override fun onRefresh() {

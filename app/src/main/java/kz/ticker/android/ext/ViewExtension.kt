@@ -3,6 +3,8 @@ package kz.ticker.android.ext
 
 import android.app.Activity
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -12,18 +14,7 @@ import java.text.NumberFormat
 import java.util.*
 
 
-fun View.setVisibility(visible: Boolean) {
-    visibility = if (visible) View.VISIBLE else View.GONE
-}
-
-fun View.show() {
-    visibility = View.VISIBLE
-}
-
-fun View.hide() {
-    visibility = View.GONE
-}
-
+val Context.networkInfo: NetworkInfo? get() = (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
 
 
 fun TextView.showPrice(currency: String = CurrencyType.USD.name, price: Double) {
