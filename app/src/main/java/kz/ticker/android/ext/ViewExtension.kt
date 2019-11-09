@@ -5,6 +5,11 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
+import kz.ticker.android.base.CurrencyType
+import java.lang.StringBuilder
+import java.text.NumberFormat
+import java.util.*
 
 
 fun View.setVisibility(visible: Boolean) {
@@ -19,35 +24,18 @@ fun View.hide() {
     visibility = View.GONE
 }
 
-fun showGroupViews(vararg view: View) {
-    view.forEach {
-        it.show()
-    }
-}
 
-fun hideGroupViews(vararg view: View) {
-    view.forEach {
-        it.hide()
-    }
-}
 
-fun View.hideKeyboard() {
-    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(windowToken, 0)
-}
+fun TextView.showPrice(currency: String = CurrencyType.USD.name, price: Double) {
 
-fun View.showKeyboard() {
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-}
+    val builder = StringBuilder()
+    val numberFormat = NumberFormat.getCurrencyInstance()
+    numberFormat.currency = Currency.getInstance(currency.toUpperCase())
+    val res = numberFormat.format(price)
+    builder.append(res)
 
-fun Activity.hideKeyboard() {
-    val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    val focus = currentFocus
-    focus?.let {
-        imm.hideSoftInputFromWindow(focus.windowToken, 0)
-    }
-}
+    text = builder.toString()
 
+}
 
 

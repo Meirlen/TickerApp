@@ -83,7 +83,6 @@ class TicketFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         mViewModel.uiEvent.observe(this, Observer {
             when (it?.status) {
                 Status.LOADING -> {
-                    activity!!.hideKeyboard()
                     showProgress()
                 }
                 Status.SUCCESS -> {

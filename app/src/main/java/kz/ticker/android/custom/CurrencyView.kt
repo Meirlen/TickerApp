@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import com.example.gateway.entity.Currency
 import kotlinx.android.synthetic.main.view_currency.view.*
 import kz.ticker.android.R
+import kz.ticker.android.ext.showPrice
 
 
 class CurrencyView @JvmOverloads constructor(
@@ -22,8 +23,16 @@ class CurrencyView @JvmOverloads constructor(
     }
 
     fun setData(currency: Currency) {
+
+        priceTv.text = currency.price_usd
         titleTv.text = currency.name
         descTv.text = currency.symbol
+
+
+        currency.price_usd?.let {
+            val price = it.toDouble()
+            priceTv.showPrice(price = price)
+        }
     }
 
 }
