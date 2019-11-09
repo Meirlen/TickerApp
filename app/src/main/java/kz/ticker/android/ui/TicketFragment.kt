@@ -65,6 +65,10 @@ class TicketFragment : androidx.fragment.app.Fragment(),
 
 
     private fun loadData(fromRemote: Boolean = false) {
+        if (!networkHandler.isConnected) {
+            showError(getString(R.string.no_internet_connect_error_message))
+            return
+        }
         mViewModel.getCurrencies(fromRemote)
     }
 
@@ -115,10 +119,6 @@ class TicketFragment : androidx.fragment.app.Fragment(),
 
 
     private fun showError(throwable: Throwable) {
-        if (!networkHandler.isConnected) {
-            showError(getString(R.string.no_internet_connect_error_message))
-            return
-        }
         handleError(throwable) { title, desc ->
             showError(title + desc)
         }
