@@ -53,4 +53,11 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
+
+
+    // Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation 'androidx.room:room-rxjava2:2.2.1'
 }

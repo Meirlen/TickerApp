@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("/v1/ticker/")
-    fun getCurrencies(): Single<Response<ArrayList<Currency>>>
+    fun getCurrencies(): Single<Response<List<Currency>>>
 
 
 }

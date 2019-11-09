@@ -3,6 +3,7 @@ package kz.ticker.android.di
 import com.example.data.impl.*
 
 import com.example.domain.interactor.GetCurrenciesUseCase
+import com.example.domain.interactor.SaveCurrencyUseCase
 
 import com.example.domain.repository.*
 
@@ -16,16 +17,19 @@ val archModule = module {
     module("repository") {
 
         factory {
-            TickerRepositoryImpl(get()) as TickerRepository
+            TickerRepositoryImpl(get(),get()) as TickerRepository
         }
         factory {
             GetCurrenciesUseCase(get())
+        }
+        factory {
+            SaveCurrencyUseCase(get())
         }
 
         module("viewModel") {
 
             viewModel {
-                TicketViewModel(get())
+                TicketViewModel(get(),get())
             }
 
         }

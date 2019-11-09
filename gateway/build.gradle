@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -24,4 +25,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
+    // Room
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation 'androidx.room:room-rxjava2:2.2.1'
 }

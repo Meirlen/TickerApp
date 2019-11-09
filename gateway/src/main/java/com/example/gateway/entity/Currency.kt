@@ -1,10 +1,17 @@
 package com.example.gateway.entity
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@Entity(tableName = "currencyTable")
 data class Currency(
+
+    @PrimaryKey(autoGenerate = true)
+    var currency_id: Int = 1,
+
     val available_supply: String?,
     val id: String?,
     val last_updated: String?,

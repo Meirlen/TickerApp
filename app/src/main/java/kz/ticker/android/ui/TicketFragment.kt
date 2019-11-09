@@ -2,9 +2,6 @@ package kz.ticker.android.ui
 
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,8 +61,8 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
     }
 
 
-    private fun loadData() {
-        mViewModel.getCurrencies()
+    private fun loadData(fromRemote: Boolean = false) {
+        mViewModel.getCurrencies(fromRemote)
     }
 
     private fun setListeners() {
@@ -80,7 +77,7 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
     private fun setObservers() {
 
 
-        mViewModel.uiEvent.observe(this, Observer {
+        mViewModel.currencyLiveData.observe(this, Observer {
             when (it?.status) {
                 Status.LOADING -> {
                     showProgress()
@@ -100,6 +97,11 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
                 }
             }
         })
+
+
+        mViewModel.eventLiveData.observe(this, Observer {
+            toast(it)
+        })
     }
 
     private fun showCurrencyList(list: List<Currency>) {
@@ -116,7 +118,7 @@ class TicketFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshla
     }
 
     override fun onRefresh() {
-        loadData()
+        loadData(true)
     }
 
     private fun hideProgress() {

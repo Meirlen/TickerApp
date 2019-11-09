@@ -39,6 +39,8 @@ buildscript {
         //IMAGE
         glideVersion = "4.3.0"
 
+        roomVersion = '2.1.0'
+
     }
 
 

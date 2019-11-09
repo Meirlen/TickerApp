@@ -7,10 +7,16 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class GetCurrenciesUseCase @Inject constructor(private val mRepository: TickerRepository) :
-    SingleUseCase<ArrayList<Currency>, Any>() {
+    SingleUseCase<List<Currency>, GetCurrenciesUseCase.Params>() {
 
-    override fun buildUseCaseSingle(params: Any): Single<ArrayList<Currency>> {
-        return mRepository.getCurrencies()
+    override fun buildUseCaseSingle(params: Params): Single<List<Currency>> {
+        return if (params.fromRemote) {
+            mRepository.getCurrenciesFromRemote()
+        } else {
+            mRepository.getCurrenciesFromDb()
+        }
     }
+
+    class Params(var fromRemote: Boolean = false)
 
 }
