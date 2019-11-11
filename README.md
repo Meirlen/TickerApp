@@ -1,5 +1,8 @@
 # 
 
+Юнит тест для use case :
+https://github.com/Meirlen/TickerApp/blob/master/domain/src/test/java/com/example/domain/interactor/GetCurrenciesUseCaseTest.java
+
 - Customview , Canvas
 - Kotlin
 - Clean Architecture (data,domain,presentation)
