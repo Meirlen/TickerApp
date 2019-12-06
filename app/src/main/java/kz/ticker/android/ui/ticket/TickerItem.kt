@@ -26,4 +26,8 @@ class TickerItem @JvmOverloads constructor(
         descTv.text = currency.symbol
     }
 
+    fun setTitle(){
+
+    }
+
 }
